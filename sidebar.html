@@ -1,0 +1,28 @@
+<header id="sidebar">
+<div id="avatar">
+  <a href="/">
+  <img class="logo" src="{{ site.avatar }}" alt="{{ site.title }}">
+  </a>
+  </div>
+  <h1><a href="/">{% if site.configs['title'] %}{{ site.configs['title'] }}{% else %}{{ site.title }}{% endif %}</a></h1>
+  <p class="description">{{ site.description }}</p>
+  <ul>
+      <li>
+      <a href="/" {% block nav_index%} {% endblock %}>Home</a>
+      </li>
+      <li>
+      <a href="/archive" {% block nav_archive %} {% endblock %}>Archive</a>
+      </li>
+      {%  if has('images') %}
+      <li>
+      <a href="/folder/" {% block nav_folder %} {% endblock %}>Photos</a>
+      </li>
+      {% endif %}
+      <li>
+      <a href="/pages/links"  {% if request.path == '/pages/links' %}class="current"{% endif %}>Links</a>
+      </li>
+    <li>
+    <a href="/pages/about"  {% if request.path == '/pages/about' %}class="current"{% endif %}>About</a>
+    </li>
+  </ul>
+</header>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{{ site.title }}{% endblock %}
+
+{% block content %}
+    <section id="post">
+        <article>
+            <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+            <div class="meta"><span class="date">{{ post.date | date('%Y.%m.%d') }}</span></div>
+            <div class="content">
+                {{ post.content }}
+            </div>
+            
+            {% set custom_comment=get_text_file('comment_js').raw_content %}
+            {% if custom_comment %}
+            {{ custom_comment }}
+            {% endif %}
+
+        </article>
+    </section>
+{% endblock %}

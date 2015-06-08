@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ site.title }}
+{% endblock %}
+
+
+{% block content %}
+  <section id="posts">
+    {% set posts= get_posts(path='/', limit=10, sort=-1, status='public') %}
+    {% for post in posts %}
+    {% set content = post.content|limit(150)  %}
+    <article>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <div class="meta">
+                  <span class="date">
+                     {{ post.date | date('%m-%d') }} <br/>
+            <i>{{ post.date | date('%Y') }}</i>
+                  </span>
+              </div>
+      <div class="content"> {{ content }}</div>
+               <div class="handler">
+                    <a class="btn_more" href="{{ post.url }}">Readmore</a>
+                   <span class="visitors">
+                      {{ post.visits or 0 }}次阅读
+                    </span>
+                    <span class="tags">
+                    {% for tag in post.tags %}
+                    <a href="/tags/{{ tag }}">{{ tag }}</a>
+                    {% endfor %}
+                    </span>
+                </div>
+    </article>
+    {% endfor %}
+
+          {% include 'paginator.html' %}
+         
+  </section>
+{% endblock %}
